@@ -13,12 +13,10 @@ import (
 )
 
 func init() {
-	ns := beego.NewNamespace("/common",
-		beego.NSNamespace("/objects",
-			beego.NSInclude(
-				&controllers.ObjectController{},
-			),
-		),
-	)
-	beego.AddNamespace(ns)
+	// Object RESTFUL
+	beego.Router("/common/objects", &controllers.ObjectController{}, "get:Index")
+	beego.Router("/common/objects", &controllers.ObjectController{}, "post:Store")
+	beego.Router("/common/objects/:id", &controllers.ObjectController{}, "get:Show")
+	beego.Router("/common/objects/:id", &controllers.ObjectController{}, "put:Update")
+	beego.Router("/common/objects/:id", &controllers.ObjectController{}, "delete:Destroy")
 }
